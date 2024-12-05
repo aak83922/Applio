@@ -114,10 +114,10 @@ with gr.Blocks(
         settings_tab()
 
 
-def launch_gradio(port):
+def launch(share=True):
     Applio.launch(
         favicon_path="assets/ICON.ico",
-        share="--share" in sys.argv,
+        share=share,  # Explicitly set share=True here for public link
         inbrowser="--open" in sys.argv,
         server_port=port,
     )
@@ -135,7 +135,7 @@ if __name__ == "__main__":
     port = get_port_from_args()
     for _ in range(MAX_PORT_ATTEMPTS):
         try:
-            launch_gradio(port)
+            launch(share=True)  # Set share=True to create a public link
             break
         except OSError:
             print(
